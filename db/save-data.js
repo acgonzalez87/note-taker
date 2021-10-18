@@ -1,4 +1,4 @@
-// Dependecncies
+// Dependencies
 const util = require("util");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid"); // Newest update
@@ -32,17 +32,14 @@ class Save {
     if (!title || !text) {
       throw new Error("Both title and text can not be blank");
     }
-    // Use UUID package to add unique IDs
     const newNote = { title, text, id: uuidv4() };
 
-    // Retrieve Notes, add the new note, update notes
     return this.retrieveNotes()
       .then((notes) => [...notes, newNote])
       .then((updatedNotes) => this.write(updatedNotes))
       .then(() => newNote);
   }
 
-  // Delete Note function - BONUS
   deleteNote(id) {
     return this.retrieveNotes()
       .then((notes) => notes.filter((note) => note.id !== id))
